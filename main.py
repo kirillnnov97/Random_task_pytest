@@ -383,43 +383,120 @@
 #
 # assert "successful" in message.text
 #---------------------------------------------------------------------------------------------------
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium import webdriver
+# import time
+# import math
+#
+# link= 'https://suninjuly.github.io/explicit_wait2.html'
+#
+# try:
+#     browser = webdriver.ChromiumEdge()
+#     browser.get(link)
+#     browser.implicitly_wait(5)
+#
+#
+#
+#     price_value = WebDriverWait(browser, 12).until(
+#         EC.text_to_be_present_in_element((By.ID, "price"),"100")
+#     )
+#     button=browser.find_element(by='xpath', value='//*[@id="book"]')
+#     button.click()
+#
+#     x_element= browser.find_element(by='xpath', value='//*[@id="input_value"]').text
+#     result=math.log(abs(12*math.sin(int(x_element))))
+#
+#     input_result= browser.find_element(by='xpath',value='//*[@id="answer"]')
+#     input_result.send_keys(result)
+#
+#     button2= browser.find_element(by='xpath', value='//*[@id="solve"]')
+#     button2.click()
+#
+# finally:
+#     time.sleep(15)
+#
+#     browser.quit()
+#
+#     #
+
+
+# print("Let's count together: {}, then goes {}, and then {}".format("one", "two", "three"))
+
+# ---------------------------------------------------------------------------------------------------
+import pytest
 from selenium import webdriver
 import time
-import math
+import unittest
+from selenium.webdriver.common.by import By
+class TestAbs(unittest.TestCase):
+    def test_abs1(self):
+        link = "http://suninjuly.github.io/registration1.html"
+        browser = webdriver.ChromiumEdge()
+        browser.get(link)
 
-link= 'https://suninjuly.github.io/explicit_wait2.html'
+        # Ваш код, который заполняет обязательные поля
+        input1 = browser.find_element(by='xpath', value='/html/body/div/form/div[1]/div[1]/input')
+        input1.send_keys("Ivan")
+        input2 = browser.find_element(by='xpath', value='/html/body/div/form/div[1]/div[2]/input')
+        input2.send_keys("Petrov")
+        input3 = browser.find_element(by='xpath', value='/html/body/div/form/div[1]/div[3]/input')
+        input3.send_keys("kirillnnov97@gmail.com")
+        input4 = browser.find_element(by='xpath', value='/html/body/div/form/div[2]/div[1]/input')
+        input4.send_keys("+79991365314")
+        input5= browser.find_element(by='xpath', value='/html/body/div/form/div[2]/div[2]/input')
+        input5.send_keys("Pochainskaya st.")
+        # Отправляем заполненную форму
+        button = browser.find_element(by='xpath', value='/html/body/div/form/button')
+        button.click()
 
-try:
-    browser = webdriver.ChromiumEdge()
-    browser.get(link)
-    browser.implicitly_wait(5)
+        # Проверяем, что смогли зарегистрироваться
+        # ждем загрузки страницы
+        time.sleep(1)
 
+        # находим элемент, содержащий текст
+        welcome_text_elt = browser.find_element(By.TAG_NAME, "h1")
+        # записываем в переменную welcome_text текст из элемента welcome_text_elt
+        welcome_text = welcome_text_elt.text
 
+        assert "Congratulations! You have successfully registered!" == welcome_text
+        assert "Congratulations! You have successfully registered!" != 1
 
-    price_value = WebDriverWait(browser, 12).until(
-        EC.text_to_be_present_in_element((By.ID, "price"),"100")
-    )
-    button=browser.find_element(by='xpath', value='//*[@id="book"]')
-    button.click()
+    def test_abs2(self):
+        link = "http://suninjuly.github.io/registration2.html"
+        browser = webdriver.ChromiumEdge()
+        browser.get(link)
 
-    x_element= browser.find_element(by='xpath', value='//*[@id="input_value"]').text
-    result=math.log(abs(12*math.sin(int(x_element))))
+        # Ваш код, который заполняет обязательные поля
+        input1 = browser.find_element(by='xpath', value='/html/body/div/form/div[1]/div[1]/input')
+        input1.send_keys("Ivan")
+        input2 = browser.find_element(by='xpath', value='/html/body/div/form/div[1]/div[2]/input')
+        input2.send_keys("Petrov")
+        input3 = browser.find_element(by='xpath', value='/html/body/div/form/div[1]/div[3]/input')
+        input3.send_keys("kirillnnov97@gmail.com")
+        input4 = browser.find_element(by='xpath', value='/html/body/div/form/div[2]/div[1]/input')
+        input4.send_keys("+79991365314")
+        input5 = browser.find_element(by='xpath', value='/html/body/div/form/div[2]/div[2]/input')
+        input5.send_keys("Pochainskaya st.")
+        # Отправляем заполненную форму
+        button = browser.find_element(by='xpath', value='/html/body/div/form/button')
+        button.click()
 
-    input_result= browser.find_element(by='xpath',value='//*[@id="answer"]')
-    input_result.send_keys(result)
+        # Проверяем, что смогли зарегистрироваться
+        # ждем загрузки страницы
+        time.sleep(1)
 
-    button2= browser.find_element(by='xpath', value='//*[@id="solve"]')
-    button2.click()
+        # находим элемент, содержащий текст
+        welcome_text_elt = browser.find_element(By.TAG_NAME, "h1")
+        # записываем в переменную welcome_text текст из элемента welcome_text_elt
+        welcome_text = welcome_text_elt.text
 
-finally:
-    time.sleep(15)
+        assert "Congratulations! You have successfully registered!" == welcome_text
 
-    browser.quit()
+if __name__ == "__main__":
+    pytest.main()
 
-    #
 
 
 
